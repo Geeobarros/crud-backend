@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Geeobarros/crud-backend/issues"
   },
-  "homepage": "https://github.com/Geeobarros/crud-backend#readme"
+  "homepage": "https://github.com/Geeobarros/crud-backend#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
