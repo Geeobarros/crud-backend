@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Geeobarros/crud-backend#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "yup": "^1.4.0"
   }
 }

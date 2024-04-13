@@ -14,11 +14,24 @@ app.use((req, res, next) =>{
 
 const produtos = []
 //Criando um produto com POST
-app.post('/produto', (req, res) => { //usando try para manipulação de erros
+app.post('/produto', (req, res) => { //usando try catch para manipulação de erros
     try {
-        const produto = req.body;
+        const produto = {nome, preco, descricao}
+        produto = req.body;
         produto.id = produtos.length + 1
         produtos.push(produto)
+
+        if(!nome){
+            res.status(400).json({mensagem: 'O nome do item é obrigatório'})
+        }
+
+        if(!preco){
+            res.status(400).json({mensagem: 'O preço do item é obrigatório'})
+        }
+
+        if(!descricao){
+            res.status(400).json({mensagem: 'A descrição do item é obrigatória'})
+        }
         res.status(201).send('Produto adicionado com sucesso')
     } catch (error) {
         res.status(400).send(error)        
@@ -29,6 +42,24 @@ app.post('/produto', (req, res) => { //usando try para manipulação de erros
 //rota GET para retornar os produtos do JSON
 app.get('/produto', (req, res) =>{
     res.json(produtos)
+    
+
+})
+
+app.get('/produto/:id', (req, res)=>{
+    try {
+        const { id } = req.params
+        const index = produtos.findIndex(prod => prod.id === parseInt(id))
+        if(index === -1){
+            throw new Error('ID do produto não encontrado')
+        }else{
+            res.send(produtos[index])
+    }
+        
+    } catch (error) {
+        res.status(400).send("Not found" + error)
+    }
+    
 })
  
 //Rota PUT para atualizar um produto existente
